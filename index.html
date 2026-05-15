@@ -1,317 +1,626 @@
+# Página romántica mejorada para sus 18 💖
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Felices 2 Meses 💖 </title>
+<title>Felices 18 mi amorcito 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #ff6ec7, #ffc6ff);
-  overflow: hidden;
-  text-align: center;
-  position: relative;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-/* Pantalla inicial */
-#inicio {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 2s ease;
+body{
+  overflow:hidden;
+  background:#000;
+  font-family:'Poppins',sans-serif;
+  color:white;
 }
 
-h1 {
-  font-size: 3rem;
-  white-space: nowrap;
-  border-right: 4px solid #fff;
-  width: 0;
-  overflow: hidden;
-  animation: typing 4s steps(30) forwards, blink 0.75s step-end infinite;
-  color: #ffdde1;
-  text-shadow: 2px 2px 4px #000, 0 0 15px #fff,0 0 30px #ff69b4;
+/* Fondo animado */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+  radial-gradient(circle at top,#ff4f9a55,transparent 40%),
+  radial-gradient(circle at bottom,#ff008855,transparent 40%),
+  linear-gradient(to bottom,#050505,#120014,#1d001f);
+  z-index:-3;
 }
 
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-@keyframes blink { 50% { border-color: transparent; } }
-
-button {
-  margin-top: 25px;
-  padding: 20px 50px;
-  font-size: 1.7rem;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(45deg, #ff3f6d, #ff9a9e);
-  color: #fff;
-  cursor: pointer;
-  transition: 0.4s;
-  box-shadow: 0 0 25px #ff69b4, 0 0 50px #ff1493;
+/* Estrellas */
+.estrellas{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:-2;
 }
 
-button:hover {
-  transform: scale(1.25);
-  box-shadow: 0 0 50px #ff69b4,0 0 100px #ff1493;
+.estrella{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation:brillar 3s infinite alternate;
+}
+
+@keyframes brillar{
+  from{
+    opacity:0.2;
+    transform:scale(1);
+  }
+  to{
+    opacity:1;
+    transform:scale(2);
+  }
+}
+
+/* Inicio */
+#inicio{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  gap:25px;
+}
+
+#inicio h1{
+  font-size:5rem;
+  font-family:'Great Vibes',cursive;
+  color:#fff;
+  text-shadow:
+  0 0 10px #fff,
+  0 0 25px #ff69b4,
+  0 0 45px #ff1493,
+  3px 3px 10px #000;
+  animation:aparecer 2s ease forwards;
+}
+
+#inicio p{
+  max-width:800px;
+  font-size:1.3rem;
+  color:#ffe6f1;
+  opacity:0;
+  animation:subir 2s ease forwards;
+  animation-delay:1s;
+}
+
+#inicio button{
+  padding:18px 45px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(45deg,#ff4f9a,#ff8dc7);
+  color:white;
+  font-size:1.2rem;
+  cursor:pointer;
+  transition:0.4s;
+  box-shadow:
+  0 0 25px #ff69b4,
+  0 0 50px #ff1493;
+  animation:pulse 2s infinite;
+}
+
+#inicio button:hover{
+  transform:scale(1.1);
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
 }
 
 /* Slider */
-#slider {
-  display: none;
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-  overflow: hidden;
-}
-
-.foto img {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  transition: transform 2s ease, filter 2s ease;
-  filter: brightness(1.1) contrast(1.2) saturate(1.2);
-}
-
-.foto img.show {
-  animation: zoomFadeEpic 1.2s ease forwards;
-}
-
-@keyframes zoomFadeEpic {
-  0% { transform: scale(1); opacity: 0; }
-  100% { transform: scale(1.05); opacity: 1; }
-}
-
-.titulo, .frase {
-  position: absolute;
-  width: 90%;
-  animation: fadeUpPulseEpic 1s ease forwards;
-  text-shadow: 2px 2px 6px #000, 0 0 20px #fff,0 0 40px #ff69b4;
-}
-
-.frase {
-  bottom: 15%;
-  font-size: 1.5rem;
-  color: #ffe6f0;
-  line-height: 1.5;
-}
-
-.titulo {
-  top: 10%;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #ffb6c1;
-}
-
-@keyframes fadeUpPulseEpic {
-  0% { opacity: 0; transform: translateY(50px) scale(0.9); }
-  50% { transform: translateY(0) scale(1.05); opacity: 1; }
-  100% { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-/* Partículas y corazones */
-.particle {
-  position: absolute;
-  font-size: 20px;
-  pointer-events: none;
-  animation: floatUpEpic 3s linear forwards;
-  opacity: 0.7;
-}
-
-@keyframes floatUpEpic {
-  0% { transform: translateY(0) scale(1); opacity: 0.7; }
-  100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
-}
-
-.corazon {
-  position: fixed;
-  bottom: -50px;
-  font-size: 3rem;
-  animation: subirEpic 2s linear infinite;
-  text-shadow: 1px 1px 3px #000, 0 0 15px #fff, 0 0 30px #ff69b4;
-  opacity: 0.8;
-}
-
-@keyframes subirEpic { from { transform: translateY(0) scale(1); opacity: 0.8; } to { transform: translateY(-110vh) scale(1.8); opacity: 0; } }
-
-#pregunta {
+#slider{
   display:none;
-  position:absolute;
-  top:0; left:0;
-  width:100vw; height:100vh;
-  background: rgba(255,192,203,0.95);
+  width:100%;
+  height:100vh;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+  position:relative;
+}
+
+.foto{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
+
+.foto img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(0.6);
+  transform:scale(1.15);
+  opacity:0;
+  transition:2s;
+}
+
+.foto img.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,#000000dd,#00000055,#000000cc);
+}
+
+.contenido{
+  position:relative;
+  z-index:2;
+  width:90%;
+  max-width:900px;
   text-align:center;
 }
 
-#pregunta p {
-  font-size:2rem;
+.titulo{
+  font-family:'Great Vibes',cursive;
+  font-size:4rem;
+  margin-bottom:25px;
   color:#fff;
-  text-shadow:2px 2px 6px #000,0 0 20px #ff69b4,0 0 40px #ff1493;
-  margin:20px;
+  text-shadow:
+  0 0 15px #fff,
+  0 0 30px #ff69b4,
+  0 0 60px #ff1493;
+  animation:fadeUp 1.5s ease;
 }
 
-#pregunta button {
-  margin: 20px;
-  padding: 18px 45px;
-  font-size:1.6rem;
-  background:linear-gradient(45deg,#ff3f6d,#ff9a9e);
-  border:none;
+.frase{
+  font-size:1.5rem;
+  line-height:1.8;
+  background:#ffffff12;
+  padding:30px;
   border-radius:25px;
-  box-shadow:0 0 20px #ff69b4,0 0 40px #ff1493;
+  backdrop-filter:blur(10px);
+  border:1px solid #ffffff33;
+  box-shadow:0 0 40px #ff69b444;
+  animation:fadeUp 2s ease;
+}
+
+.botonesSlider{
+  margin-top:35px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+.botonesSlider button{
+  padding:15px 35px;
+  border:none;
+  border-radius:40px;
+  font-size:1rem;
   cursor:pointer;
+  color:white;
+  background:linear-gradient(45deg,#ff4f9a,#ff8dc7);
+  box-shadow:0 0 25px #ff69b4;
   transition:0.4s;
 }
 
-#pregunta button:hover {
-  transform: scale(1.25);
-  box-shadow:0 0 40px #ff69b4,0 0 80px #ff1493;
+.botonesSlider button:hover{
+  transform:scale(1.08);
+}
+
+/* Barra de progreso */
+.barra{
+  position:absolute;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:70%;
+  height:8px;
+  background:#ffffff22;
+  border-radius:50px;
+  overflow:hidden;
+  z-index:10;
+}
+
+.progreso{
+  height:100%;
+  width:0%;
+  background:linear-gradient(to right,#ff69b4,#ff1493);
+  transition:0.5s;
+}
+
+/* Carta final */
+#final{
+  display:none;
+  height:100vh;
+  width:100%;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+  text-align:center;
+}
+
+.carta{
+  max-width:900px;
+  background:#ffffff10;
+  border:1px solid #ffffff33;
+  backdrop-filter:blur(15px);
+  border-radius:35px;
+  padding:50px;
+  box-shadow:
+  0 0 40px #ff69b455,
+  0 0 80px #ff149322;
+  animation:fadeUp 2s ease;
+}
+
+.carta h1{
+  font-family:'Great Vibes',cursive;
+  font-size:5rem;
+  margin-bottom:25px;
+  color:#fff;
+}
+
+.carta p{
+  font-size:1.25rem;
+  line-height:2;
+  color:#ffeef6;
+}
+
+.carta button{
+  margin-top:35px;
+  padding:16px 40px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(45deg,#ff4f9a,#ff8dc7);
+  color:white;
+  cursor:pointer;
+  font-size:1rem;
+  box-shadow:0 0 25px #ff69b4;
+}
+
+/* Corazones */
+.corazon{
+  position:fixed;
+  bottom:-100px;
+  animation:subirCorazon linear forwards;
+  opacity:0.8;
+  pointer-events:none;
+}
+
+@keyframes subirCorazon{
+  from{
+    transform:translateY(0) scale(1);
+    opacity:0.8;
+  }
+  to{
+    transform:translateY(-120vh) scale(1.8);
+    opacity:0;
+  }
+}
+
+@keyframes aparecer{
+  from{
+    opacity:0;
+    transform:scale(0.8);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes subir{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@media(max-width:768px){
+
+  #inicio h1{
+    font-size:3.2rem;
+  }
+
+  .titulo{
+    font-size:2.8rem;
+  }
+
+  .frase{
+    font-size:1.1rem;
+    padding:20px;
+  }
+
+  .carta h1{
+    font-size:3.5rem;
+  }
+
 }
 
 </style>
 </head>
 <body>
 
+<div class="estrellas" id="estrellas"></div>
+
 <section id="inicio">
-  <h1>Felices 2 meses princesita de papi 💖</h1>
-  <button onclick="iniciarSlider()">Entrar</button>
+
+  <h1>Felices 18 años mi amorcito 💖</h1>
+
+  <p>
+    Hoy cumple años la persona que cambió completamente mi vida.
+    Gracias por existir, gracias por aparecer, gracias por hacerme feliz.
+  </p>
+
+  <button onclick="iniciar()">Entrar al recuerdo ✨</button>
+
 </section>
 
 <section id="slider">
-  <div class="foto">
-    <img id="imagenSlider" src="" alt="Foto">
-    <button id="siguienteBtn" style="
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      padding: 20px 40px;
-      z-index: 10;
-      box-shadow: 0 0 25px #ff69b4,0 0 50px #ff1493;
-    ">Siguiente 💗</button>
+
+  <div class="barra">
+    <div class="progreso" id="progreso"></div>
   </div>
-  <div class="titulo" id="tituloSlider"></div>
-  <div class="frase" id="fraseSlider"></div>
+
+  <div class="foto">
+    <img id="sliderImg" src="foto1.jpeg">
+    <div class="overlay"></div>
+  </div>
+
+  <div class="contenido">
+
+    <div class="titulo" id="titulo"></div>
+
+    <div class="frase" id="frase"></div>
+
+    <div class="botonesSlider">
+      <button onclick="anterior()">⬅ Atrás</button>
+      <button onclick="siguiente()">Siguiente 💖</button>
+    </div>
+
+  </div>
+
 </section>
 
-<section id="pregunta">
-  <p id="preguntaTexto"></p>
-  <div>
-    <button onclick="responder(true)">CHII 💍</button>
-    <button onclick="responder(false)">No 😢</button>
+<section id="final">
+
+  <div class="carta">
+
+    <h1>Para vos 💌</h1>
+
+    <p>
+      Felices 18 años mi amorcito. 💖
+      <br><br>
+      La verdad es que el tiempo pasó demasiado rápido...
+      parece ayer cuando empezamos a hablar y hoy ya sos una nena grande.
+      Ya podés hacer muchísimas cosas nuevas, aunque también haya más responsabilidades y riesgos.
+      <br><br>
+      Pero quiero que sepas algo:
+      voy a estar con vos en cada etapa de tu vida.
+      <br><br>
+      Tuve muchísima suerte de encontrarte.
+      Sos diferente a las demás, y eso fue lo que más me enamoró de vos.
+      Sos perfecta para mí.
+      <br><br>
+      Gracias por haber aparecido en mi vida.
+      Me cambiaste completamente y para bien.
+      Le diste un giro enorme a todo.
+      <br><br>
+      Y perdón por las veces en las que te hice sentir mal.
+      Prometo mejorar, porque sos lo más lindo y bueno que me pasó.
+      <br><br>
+      Como diría mi abuela...
+      sos mi tesorito. ✨
+      <br><br>
+      Te amo muchísimo. 💗
+    </p>
+
+    <button onclick="lluviaFinal()">Te amo 💖</button>
+
   </div>
+
 </section>
 
 <script>
-const fotos = ["foto1.jpeg","foto2.jpeg","foto3.jpeg","foto4.jpeg","foto5.jpeg",
-"extra1.jpeg","extra2.jpeg"];
-const titulos = [
-  "Cuando todo comenzó 💖",
-  "Cuando dormimos junto por primera vez 🏡",
-  "Día divertido en la plaza 🌳",
-  "Plaza Castelli, otro día genial 🎠",
-  "Tus hermosos ojos, perfectos 💘",
-  "Momentos mágicos juntos ✨",
-  "Recuerdos inolvidables 💞"
+
+const fotos = [
+  "foto1.jpeg",
+  "foto2.jpeg",
+  "foto3.jpeg",
+  "foto4.jpeg",
+  "foto5.jpeg",
+  "extra1.jpeg",
+  "extra2.jpeg"
 ];
+
+const titulos = [
+  "La nena que cambió mi vida 💖",
+  "Nuestro primer descanso juntos 🏡",
+  "Otro día perfecto a tu lado 🌳",
+  "Tus ojos hermosos 💘",
+  "Momentos que quiero guardar para siempre ✨",
+  "Ya sos una nena grande 💞",
+  "Mi tesorito hermoso 💝"
+];
+
 const frases = [
-  "Supe que quería estar con vos para siempre 💗",
-  "Estar juntos así me hizo darme cuenta lo increíble que sos mi reina 💝",
-  "Nos divertimos tanto hablando y jugando 💓",
-  "Cada día juntos en la plaza me recuerda lo afortunado que soy 💖",
-  "Tu mirada me enamora más cada día, princesita 💞",
-  "Momentos que quedarán para siempre 💖",
-  "Amor puro, felicidad total 💗"
+  "El tiempo pasó demasiado rápido y hoy ya cumplís 18 años 💗",
+  "Sos lo mejor que me pasó en muchísimo tiempo 💕",
+  "Gracias por aparecer en mi vida cuando más te necesitaba 💖",
+  "Me hacés sentir amado, acompañado y feliz 💞",
+  "Prometo mejorar por vos y por nosotros ✨",
+  "Quiero seguir creando recuerdos con vos 💘",
+  "Te amo muchísimo princesita 💝"
 ];
 
 let index = 0;
 
-function iniciarSlider() {
-  document.getElementById('inicio').style.display = 'none';
-  document.getElementById('slider').style.display = 'block';
-  mostrarSlide();
-  generarParticles();
+function iniciar(){
+
+  document.getElementById('inicio').style.display='none';
+  document.getElementById('slider').style.display='flex';
+
+  actualizar();
 }
 
-function mostrarSlide() {
-  const img = document.getElementById('imagenSlider');
+function actualizar(){
+
+  const img = document.getElementById('sliderImg');
+
   img.classList.remove('show');
-  img.src = fotos[index];
-  img.onload = () => img.classList.add('show'); 
-  document.getElementById('fraseSlider').textContent = frases[index];
-  document.getElementById('tituloSlider').textContent = titulos[index];
-  const btn = document.getElementById('siguienteBtn');
-  if(index === fotos.length - 1) {
-    btn.textContent = "Te tengo una pregunta 💖";
-    btn.onclick = mostrarPregunta;
-  } else {
-    btn.textContent = "Siguiente 💗";
-    btn.onclick = () => { index++; mostrarSlide(); };
+
+  setTimeout(()=>{
+
+    img.src = fotos[index];
+
+    img.classList.add('show');
+
+  },300);
+
+  document.getElementById('titulo').innerHTML = titulos[index];
+
+  document.getElementById('frase').innerHTML = frases[index];
+
+  const porcentaje = ((index+1)/fotos.length)*100;
+
+  document.getElementById('progreso').style.width = porcentaje + "%";
+}
+
+function siguiente(){
+
+  index++;
+
+  if(index >= fotos.length){
+
+    document.getElementById('slider').style.display='none';
+    document.getElementById('final').style.display='flex';
+
+    return;
+  }
+
+  actualizar();
+}
+
+function anterior(){
+
+  if(index > 0){
+
+    index--;
+
+    actualizar();
   }
 }
 
-function generarParticles() {
-  setInterval(() => {
-    if(Math.random() < 0.2){ // reduce frecuencia
-      const particleEmojis = ["💗","💖","💝"];
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      particle.innerHTML = particleEmojis[Math.floor(Math.random()*particleEmojis.length)];
-      particle.style.left = Math.random()*100 + "vw";
-      particle.style.fontSize = (Math.random()*30 + 20) + "px";
-      document.body.appendChild(particle);
-      setTimeout(() => { particle.remove(); }, 3000);
-    }
-  }, 200);
-}
+/* corazones flotando */
+setInterval(()=>{
 
-setInterval(() => {
-  if(Math.random() < 0.2){ // reduce frecuencia
-    const coraz = ["💗","💖","💝"];
-    let corazon = document.createElement('div');
-    corazon.innerHTML = coraz[Math.floor(Math.random()*coraz.length)];
+  if(Math.random() < 0.35){
+
+    const corazon = document.createElement('div');
+
     corazon.classList.add('corazon');
-    corazon.style.left = Math.random() * 100 + "vw";
-    corazon.style.fontSize = (Math.random() * 50 + 30) + "px";
+
+    corazon.innerHTML = ["💖","💗","💘","💝"]
+    [Math.floor(Math.random()*4)];
+
+    corazon.style.left = Math.random()*100 + "vw";
+
+    corazon.style.fontSize = (Math.random()*40+20)+"px";
+
+    corazon.style.animationDuration = (Math.random()*3+4)+"s";
+
     document.body.appendChild(corazon);
-    setTimeout(() => { corazon.remove(); }, 3500);
-  }
-}, 250);
 
-function mostrarPregunta() {
-  document.getElementById('slider').style.display = 'none';
-  const pregunta = document.getElementById('pregunta');
-  pregunta.style.display = 'flex';
-  document.getElementById('preguntaTexto').textContent = 
-  "Tal vez es muy pronto, no lo sé, tal vez soy joven, pero sé que quiero pasar toda mi vida con vos. Constanza, ¿te casarías conmigo?";
+    setTimeout(()=>{
+      corazon.remove();
+    },7000);
+  }
+
+},200);
+
+/* estrellas */
+for(let i=0;i<120;i++){
+
+  const estrella = document.createElement('div');
+
+  estrella.classList.add('estrella');
+
+  estrella.style.left = Math.random()*100 + 'vw';
+
+  estrella.style.top = Math.random()*100 + 'vh';
+
+  estrella.style.animationDuration = (Math.random()*4+2)+'s';
+
+  document.getElementById('estrellas').appendChild(estrella);
 }
 
-function responder(si) {
-  const pregunta = document.getElementById('pregunta');
-  if(si) {
-    for(let i=0;i<150;i++){
-      const cora = document.createElement('div');
-      cora.innerHTML = ["💗","💖","💝"][Math.floor(Math.random()*3)];
-      cora.style.position="fixed";
-      cora.style.left=Math.random()*100+"vw";
-      cora.style.top=Math.random()*100+"vh";
-      cora.style.fontSize=(Math.random()*60+30)+"px";
-      cora.style.animation="floatUpEpic 3s ease forwards";
-      cora.style.textShadow="1px 1px 3px #000,0 0 25px #ff69b4";
-      document.body.appendChild(cora);
-      setTimeout(()=>{cora.remove()},3500);
-    }
-    pregunta.innerHTML = "<h1 style='color:#fff;text-shadow:2px 2px 6px #000,0 0 30px #ff1493,0 0 60px #ff69b4;font-size:3rem;'>¡Sí! 💍 💖</h1>";
-  } else {
-    pregunta.innerHTML = "<h1 style='color:#fff;text-shadow:2px 2px 6px #000,0 0 30px #ff1493,0 0 60px #ff69b4;font-size:3rem;'>Tal vez más adelante 😢</h1>";
+function lluviaFinal(){
+
+  for(let i=0;i<250;i++){
+
+    const cora = document.createElement('div');
+
+    cora.innerHTML = ["💖","💗","💘","💝"]
+    [Math.floor(Math.random()*4)];
+
+    cora.style.position='fixed';
+
+    cora.style.left=Math.random()*100+'vw';
+
+    cora.style.top=Math.random()*100+'vh';
+
+    cora.style.fontSize=(Math.random()*50+20)+'px';
+
+    cora.style.animation='subirCorazon 4s linear forwards';
+
+    document.body.appendChild(cora);
+
+    setTimeout(()=>{
+      cora.remove();
+    },4000);
   }
 }
+
 </script>
 
 </body>
 </html>
+```
+
+## Mejoras que tiene esta versión ✨
+
+* Fondo cinematográfico animado.
+* Estrellas brillando en tiempo real.
+* Barra de progreso romántica.
+* Estética glassmorphism moderna.
+* Tipografía elegante y mucho más emocional.
+* Transiciones suaves tipo película.
+* Carta final gigante dedicada a ella.
+* Botones más premium.
+* Corazones flotando constantemente.
+* Más profundidad visual y sombras.
+* Diseño responsive para celular.
+* Muchísimo más vibe “cumple de 18 especial”.
