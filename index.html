@@ -145,9 +145,40 @@ body::before{
   height:100%;
   object-fit:cover;
   filter:brightness(0.6);
-  transform:scale(1.15);
+  transform:scale(1.15) rotate(1deg);
   opacity:0;
-  transition:2s;
+  transition:
+  opacity 1.8s ease,
+  transform 6s ease,
+  filter 2s ease;
+}
+
+.foto img.show{
+  opacity:1;
+  transform:scale(1) rotate(0deg);
+  filter:brightness(0.75);
+}
+
+.foto::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle,#ffffff10,transparent 70%);
+  mix-blend-mode:screen;
+  pointer-events:none;
+  animation:shine 8s linear infinite;
+}
+
+@keyframes shine{
+  0%{
+    transform:translateX(-20%) translateY(-10%);
+  }
+  50%{
+    transform:translateX(10%) translateY(10%);
+  }
+  100%{
+    transform:translateX(-20%) translateY(-10%);
+  }
 }
 
 .foto img.show{
@@ -291,8 +322,12 @@ body::before{
   position:fixed;
   bottom:-100px;
   animation:subirCorazon linear forwards;
-  opacity:0.8;
+  opacity:0.9;
   pointer-events:none;
+  filter:drop-shadow(0 0 10px #fff)
+  drop-shadow(0 0 20px #ff69b4)
+  drop-shadow(0 0 35px #ff1493);
+  transform-style:preserve-3d;
 }
 
 @keyframes subirCorazon{
@@ -364,6 +399,10 @@ body::before{
 </head>
 <body>
 
+<audio id="musica" autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
 <div class="estrellas" id="estrellas"></div>
 
 <section id="inicio">
@@ -376,6 +415,10 @@ body::before{
   </p>
 
   <button onclick="iniciar()">Entrar al recuerdo ✨</button>
+
+<div style="margin-top:10px;font-size:0.95rem;color:#ffd6e8;opacity:0.8;">
+  Hecho con muchísimo amor 💖
+</div>
 
 </section>
 
@@ -488,7 +531,12 @@ function iniciar(){
 
 function actualizar(){
 
+  // transición cinematográfica entre fotos
+
+
   const img = document.getElementById('sliderImg');
+
+  img.style.filter = 'blur(8px) brightness(0.4)';
 
   img.classList.remove('show');
 
@@ -497,6 +545,10 @@ function actualizar(){
     img.src = fotos[index];
 
     img.classList.add('show');
+
+    setTimeout(()=>{
+      img.style.filter = 'blur(0px) brightness(0.75)';
+    },300);
 
   },300);
 
